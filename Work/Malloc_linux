@@ -1,0 +1,22 @@
+srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop$ cat mhello.c
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+int main(void)
+{
+//printf("ssss");
+char *a;
+//a = (char *) malloc(11 * sizeof(char));
+a = (char *)  malloc(11);
+//a = "HelloWorldssssssssssss";
+strcpy(a,"HelloWorld");
+printf("%s\n",a);
+free(a);
+printf("%s\n",a);
+}
+
+srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop$ gcc mhello.c -o mhello
+srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop$ ./mhello
+HelloWorld
+
+srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop$ 

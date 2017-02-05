@@ -1,0 +1,100 @@
+rinivas@srinivas-Lenovo-Flex-2-14:~/Desktop/xv6 OS/xv6-public$ sudo make qemu
+qemu-system-i386 -serial mon:stdio -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp 2 -m 512 
+xv6...
+cpu1: starting
+cpu0: starting
+sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
+init: starting sh
+$ 
+$ 
+$ ls
+.              1 1 512
+..             1 1 512
+README         2 2 2487
+cat            2 3 14340
+echo           2 4 13205
+forktest       2 5 8067
+grep           2 6 15892
+init           2 7 14090
+kill           2 8 13245
+ln             2 9 13171
+ls             2 10 16015
+mkdir          2 11 13266
+rm             2 12 13247
+sh             2 13 24671
+stressfs       2 14 14137
+usertests      2 15 67093
+wc             2 16 15026
+zombie         2 17 12915
+hello          2 18 12930
+memoryalloc    2 19 14124
+console        3 20 0
+$ memoryalloc
+Start Address is : 45040
+Next Address is : 45040
+Next Address is : 45041
+Next Address is : 45042
+Next Address is : 45043
+Next Address is : 45044
+Next Address is : 45045
+Next Address is : 45046
+Next Address is : 45047
+Next Address is : 45048
+Next Address is : 45049
+Next Address is : 45050
+Next Address is : 45051
+Next Address is : 45052
+The Data written is : H at 45040
+The Data written is : e at 45041
+The Data written is : l at 45042
+The Data written is : l at 45043
+The Data written is : o at 45044
+The Data written is : W at 45045
+The Data written is : o at 45046
+The Data written is : r at 45047
+The Data written is : l at 45048
+The Data written is : d at 45049
+The Data written is : ! at 45050
+The Data written is : � at 45051
+The Data written is : � at 45052
+The Data is : HelloWorld!��
+The Data Fetch after Memory Freeing is : D$Hell�D$oWor�D$!�t&
+The Address after Memory Freeing is : 45040
+$ 
+$ srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop/xv6 OS/xv6-public$ cat memoryalloc.c
+#include "user.h"
+#include "stat.h"
+#include "types.h"
+int main(void) 
+{
+int i;
+char *a;
+a = (char *) malloc(11);
+//a = malloc(1);
+//b = "HelloWorld";
+char *start; 
+start = a;
+printf(1,"Start Address is : %d\n",start);
+char b[11] = "HelloWorld!"; 
+for(i = 0; b[i] != '\0'; i++)
+    {
+        *a = b[i];
+//        printf(1,"B copy:%c\n",b[i]);
+//        printf(1,"Copied to A:%c",*a);
+        printf(1,"Next Address is : %d\n",a);
+        a++;
+    }
+
+    *a  = '\0';
+for(a = start; *a != '\0'; a++) {
+   printf(1,"The Data written is : %c at %d\n",*a,a);
+}
+a = start;
+printf(1,"The Data is : %s\n",a);
+free(a);
+printf(1,"The Data Fetch after Memory Freeing is : %s\n",*a);
+printf(1,"The Address after Memory Freeing is : %d\n",a);
+exit();
+}
+srinivas@srinivas-Lenovo-Flex-2-14:~/Desktop/xv6 OS/xv6-public$ 
+
